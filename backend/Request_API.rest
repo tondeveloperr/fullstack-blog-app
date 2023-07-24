@@ -1,0 +1,9 @@
+### Register a user
+POST http://localhost:5000/api/v1/register
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "email": "john.doe@example.com",
+  "password": "secretpassword"
+}
