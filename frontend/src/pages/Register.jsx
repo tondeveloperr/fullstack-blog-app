@@ -1,15 +1,60 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosConfig";
 
 const Register = () => {
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [isError, setIsError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.value]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axiosInstance.post("/register", inputs);
+      navigate("/login");
+    } catch (error) {
+      if (error.response) {
+        setIsError(error.response.data.message);
+      }
+    }
+  };
+
   return (
     <div className="auth">
       <h1>Register</h1>
       <form>
-        <input required type="text" placeholder="username" />
-        <input required type="email" placeholder="email" />
-        <input required type="password" placeholder="password" />
-        <button>Register</button>
-        <p>This is an error</p>
+        <input
+          required
+          type="text"
+          placeholder="username"
+          name="username"
+          onChange={handleChange}
+        />
+        <input
+          required
+          type="email"
+          placeholder="email"
+          name="email"
+          onChange={handleChange}
+        />
+        <input
+          required
+          type="password"
+          placeholder="password"
+          name="password"
+          onChange={handleChange}
+        />
+        <button onClick={handleSubmit}>Register</button>
+        {isError && <p>{isError}</p>}
         <span>
           Do you have an account? <Link to="/login">Login</Link>
         </span>

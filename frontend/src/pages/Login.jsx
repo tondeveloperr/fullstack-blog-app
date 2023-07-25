@@ -1,14 +1,51 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosConfig";
 
 const Login = () => {
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [isError, setIsError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.value]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axiosInstance.post("/login", inputs);
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        setIsError(error.response.data.message);
+      }
+    }
+  };
   return (
     <div className="auth">
       <h1>Login</h1>
       <form>
-        <input type="text" placeholder="username" />
-        <input type="password" placeholder="password" />
-        <button>Login</button>
-        <p>This is an error</p>
+        <input
+          required
+          type="text"
+          placeholder="username"
+          name="username"
+          onChange={handleChange}
+        />
+        <input
+          required
+          type="password"
+          placeholder="password"
+          name="password"
+          onChange={handleChange}
+        />
+        <button onClick={handleSubmit}>Login</button>
+        {isError && <p>{isError}</p>}
         <span>
           Don&rsquo;t you have an account? <Link to="/register">Register</Link>
         </span>
