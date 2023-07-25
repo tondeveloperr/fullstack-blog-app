@@ -14,7 +14,7 @@ export const register = (req, res) => {
       // Hash password
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err)
-          return res.status(500).json({ error: "Internal Server Error" });
+          return res.status(500).json({ message: "Internal Server Error" });
 
         // Simpan pengguna baru ke dalam database
         const insertQuery =
@@ -24,7 +24,7 @@ export const register = (req, res) => {
 
         db.query(insertQuery, values, (err, data) => {
           if (err)
-            return res.status(500).json({ error: "Internal Server Error" });
+            return res.status(500).json({ message: "Internal Server Error" });
           return res
             .status(200)
             .json({ message: "User successfully registered!" });
@@ -79,4 +79,12 @@ export const login = (req, res) => {
   });
 };
 
-export const logout = (req, res) => {};
+export const logout = (req, res) => {
+  res
+    .clearCookie("access_token", {
+      sameSite: "none",
+      secure: true,
+    })
+    .status(200)
+    .json({ message: "User has been logged out." });
+};
