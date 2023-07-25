@@ -9,26 +9,25 @@ const Navbar = () => {
     <div className="navbar">
       <div className="container">
         <div className="logo">
-          <img src={IconLogo} alt="logo" />
+          <Link to="/">
+            <img src={IconLogo} alt="logo" />
+          </Link>
         </div>
         <div className="links">
-          <Link className="link" to="/?cat=art">
-            <h6>ART</h6>
-          </Link>
-          <Link className="link" to="/?cat=science">
-            <h6>SCIENCE</h6>
-          </Link>
-          <Link className="link" to="/?cat=technology">
+          <Link className="link" to="/?category=technology">
             <h6>TECHNOLOGY</h6>
           </Link>
-          <Link className="link" to="/?cat=cinema">
-            <h6>CINEMA</h6>
+          <Link className="link" to="/?category=health ">
+            <h6>HEALTH</h6>
           </Link>
-          <Link className="link" to="/?cat=design">
-            <h6>DESIGN</h6>
+          <Link className="link" to="/?category=travel">
+            <h6>TRAVEL</h6>
           </Link>
-          <Link className="link" to="/?cat=food">
-            <h6>FOOD</h6>
+          <Link className="link" to="/?category=fashion">
+            <h6>FASHION</h6>
+          </Link>
+          <Link className="link" to="/?category=arts">
+            <h6>ARTS</h6>
           </Link>
           <span>{currentUser?.username}</span>
           {currentUser ? (
