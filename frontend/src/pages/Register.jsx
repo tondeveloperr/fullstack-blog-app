@@ -13,7 +13,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setInputs((prev) => ({ ...prev, [e.target.value]: e.target.value }));
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {

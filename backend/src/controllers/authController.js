@@ -1,29 +1,33 @@
 import { db } from "../utils/db.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const register = (req, res) => {
-  //cek pengguna
+  // Cek pengguna
   const query = "SELECT * FROM users WHERE email = ? OR username = ?";
 
   db.query(query, [req.body.email, req.body.username], (err, data) => {
-    if (err) return res.json(err);
+    if (err) return res.status(500).json({ error: "Internal Server Error" });
     if (data.length) {
       return res.status(409).json({ message: "User already exists!" });
     } else {
-      //Hash password
+      // Hash password
       bcrypt.hash(req.body.password, 10, (err, hash) => {
-        if (err) return res.json(err);
+        if (err)
+          return res.status(500).json({ error: "Internal Server Error" });
 
         // Simpan pengguna baru ke dalam database
         const insertQuery =
-          "INSERT INTO users(`username`,`email`,`password`) VALUE (?)";
+          "INSERT INTO users(`username`, `email`, `password`) VALUES (?, ?, ?)";
 
         const values = [req.body.username, req.body.email, hash];
 
-        db.query(insertQuery, [values], (err, data) => {
+        db.query(insertQuery, values, (err, data) => {
           if (err)
             return res.status(500).json({ error: "Internal Server Error" });
-          return res.status(200).json("User successfully registered!");
+          return res
+            .status(200)
+            .json({ message: "User successfully registered!" });
         });
       });
     }
@@ -55,8 +59,22 @@ export const login = (req, res) => {
         return res.status(400).json({ message: "Wrong username or password" });
       }
 
-      // Jika login berhasil
-      return res.status(200).json({ message: "Login successful" });
+      // Jika login berhasil, buat token JWT
+      const token = jwt.sign(
+        {
+          id: data[0].id,
+        },
+        "secret_key"
+      );
+
+      const { password, ...other } = data[0];
+
+      res
+        .cookie("access_token", token, {
+          httpOnly: true,
+        })
+        .status(200)
+        .json(other);
     });
   });
 };

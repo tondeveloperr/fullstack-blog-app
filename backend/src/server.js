@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import corsOptions from "./utils/corsOptions.js";
 
 import authRoute from "./routes/authRoute.js";
@@ -15,6 +16,7 @@ const app = express();
 app.use(cors(corsOptions));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/v1", authRoute);
 app.use("/api/v1", userRoute);
