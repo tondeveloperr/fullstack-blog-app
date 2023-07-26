@@ -4,10 +4,10 @@ import jwt from "jsonwebtoken";
 
 export const register = (req, res) => {
   // Cek pengguna
-  const query = "SELECT * FROM users WHERE email = ? OR username = ?";
+  const selectQuery = "SELECT * FROM users WHERE email = ? OR username = ?";
 
-  db.query(query, [req.body.email, req.body.username], (err, data) => {
-    if (err) return res.status(500).json({ error: "Internal Server Error" });
+  db.query(selectQuery, [req.body.email, req.body.username], (err, data) => {
+    if (err) return res.status(500).json({ message: "Internal Server Error" });
     if (data.length) {
       return res.status(409).json({ message: "User already exists!" });
     } else {
@@ -36,9 +36,9 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
   //cek user
-  const query = "SELECT * FROM users WHERE username = ?";
+  const selectQuery = "SELECT * FROM users WHERE username = ?";
 
-  db.query(query, [req.body.username], (err, data) => {
+  db.query(selectQuery, [req.body.username], (err, data) => {
     if (err) {
       return res.status(500).json({ message: "Internal Server Error" });
     }
@@ -64,7 +64,7 @@ export const login = (req, res) => {
         {
           id: data[0].id,
         },
-        "secret_key"
+        "jwt_key"
       );
 
       const { password, ...other } = data[0];
