@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Footer from "./components/Footer";
-import Single from "./pages/Single";
-import Write from "./pages/Write";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
+import Navbar from "./components/navbar/Navbar";
+import Home from "./pages/home/Home";
+import Footer from "./components/footer/Footer";
+import Single from "./pages/single/Single";
+import Write from "./pages/write/Write";
 import "./style.scss";
+import Page404 from "./components/page404/Page404";
 
 const Layout = () => {
   return (
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/write",
         element: <Write />,
+      },
+      {
+        path: "/*",
+        element: <Page404 />,
       },
     ],
   },
