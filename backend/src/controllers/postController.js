@@ -23,7 +23,7 @@ export const getPosts = (req, res) => {
 
 export const getPost = (req, res) => {
   const selectQuery =
-    "SELECT `username`,`title`,`description`,`category`, p.image, u.image AS userImage, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id =?";
+    "SELECT p.id, `username`,`title`,`description`,`category`, p.image, u.image AS userImage, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id =?";
 
   db.query(selectQuery, [req.params.id], (err, data) => {
     if (err) {
@@ -39,11 +39,68 @@ export const getPost = (req, res) => {
 };
 
 export const addPost = (req, res) => {
-  res.json("from controller post...");
+  const token = req.cookies.access_token;
+
+  if (!token) return res.status(401).json({ message: "Not authentication" });
+
+  jwt.verify(token, "jwt_key", (err, userInfo) => {
+    if (err) {
+      return res.status(403).json({ message: "Token is not valid!" });
+    }
+
+    const insertQuery =
+      "INSERT INTO posts(`title`,`description`,`category`,`image`,`date`,`uid`) VALUES (?)";
+
+    const values = [
+      req.body.title,
+      req.body.description,
+      req.body.category,
+      req.body.image,
+      req.body.date,
+      userInfo.id,
+    ];
+
+    db.query(insertQuery, [values], (err, data) => {
+      if (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+      }
+
+      return res.status(200).json({ message: "Post has been created" });
+    });
+  });
 };
+
 export const updatePost = (req, res) => {
-  res.json("from controller post...");
+  const token = req.cookies.access_token;
+
+  if (!token) return res.status(401).json({ message: "Not authentication" });
+
+  jwt.verify(token, "jwt_key", (err, userInfo) => {
+    if (err) {
+      return res.status(403).json({ message: "Token is not valid!" });
+    }
+
+    const postId = req.params.id;
+    const insertQuery =
+      "UPDATE posts SET `title`=?,`description`=?,`category`=?,`image`=? WHERE `id` = ? AND `uid` = ?";
+
+    const values = [
+      req.body.title,
+      req.body.description,
+      req.body.category,
+      req.body.image,
+    ];
+
+    db.query(insertQuery, [...values, postId, userInfo.id], (err, data) => {
+      if (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+      }
+
+      return res.status(200).json({ message: "Post has been updated" });
+    });
+  });
 };
+
 export const deletePost = (req, res) => {
   const token = req.cookies.access_token;
 
