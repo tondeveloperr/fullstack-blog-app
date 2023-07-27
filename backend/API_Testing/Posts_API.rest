@@ -5,5 +5,34 @@ GET http://localhost:5000/api/v1/posts/?category=health
 ### GET post by id
 GET http://localhost:5000/api/v1/post/4
 
+
+### ADD post
+POST http://localhost:5000/api/v1/post
+Content-Type: application/json
+Set-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MDQxNDU5MH0.Ioj6ZFbnqRS7IAD8TKWiAedHcf4-Aj5NmUYQLkTrEeQ
+
+{
+  "title": "Judul Posting",
+  "description": "Deskripsi posting...",
+  "category": "health",
+  "image": "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "date": "2023-07-24 07:30:00",
+  "uid": 16
+}
+
+
+### UPDATE post
+PUT http://localhost:5000/api/v1/post/9
+Content-Type: application/json
+Set-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MDQxNTU2MX0.slshfZ3yTtsG-OSmYK7KBWqMlpA1Kdi1cPmKElxzNWA
+
+{
+  "title": "Judul Update",
+  "description": "Deskripsi update...",
+  "category": "health",
+  "image": "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "uid": 16
+}
+
 ### DELETE post by id
 DELETE http://localhost:5000/api/v1/post/4
