@@ -9,7 +9,6 @@ import multer from "multer";
 import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
-import { Hello } from "../Hello.js";
 
 const port = process.env.APP_PORT || 5000;
 
