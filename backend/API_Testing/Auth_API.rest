@@ -18,5 +18,18 @@ Content-Type: application/json
 }
 
 
+
+### UPDATE user
+PUT http://localhost:5000/api/v1/user/16
+Content-Type: application/json
+Set-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MDQ5Njc4Mn0.PgHtqc0kRT1QnlrDj-HpOWE055RmJ7NnxFi1xf8wNxI
+
+{
+  "username": "Kartono update",
+  "email": "update@gmail.com",
+  "image": "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "id":16
+}
+
 ### Logout a user
 POST http://localhost:5000/api/v1/logout

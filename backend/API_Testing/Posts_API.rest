@@ -22,9 +22,9 @@ Set-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdC
 
 
 ### UPDATE post
-PUT http://localhost:5000/api/v1/post/9
+PUT http://localhost:5000/api/v1/post/12
 Content-Type: application/json
-Set-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MDQxNTU2MX0.slshfZ3yTtsG-OSmYK7KBWqMlpA1Kdi1cPmKElxzNWA
+Set-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MDQ3ODA0OX0.LWvUgm8Pa110O6uMUrN6Vc0AD4E3mZulPj3OXSWoabE
 
 {
   "title": "Judul Update",
