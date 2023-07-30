@@ -13,9 +13,15 @@ POST http://localhost:5000/api/v1/login
 Content-Type: application/json
 
 {
-  "username": "kartono",
+  "username": "kartono update",
   "password": "123"
 }
+
+
+### GET user post
+GET http://localhost:5000/userPosts?uid=16
+Content-Type: application/json
+Set-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MDY3OTM0MH0.FI7n1bm394WOhiob9YFSSsb4BQux-F5EpbLqi2ztesI
 
 
 
