@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { IconAvatarDefault } from "../../assets/icons";
-import "./profile.scss";
 import { AuthContext } from "../../context/AuthContext";
 import axiosInstance from "../../utils/axiosConfig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ModalEditProfile } from "../../components/atoms";
+import "./profile.scss";
+import { Page404 } from "../../components/molecules";
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -13,24 +14,37 @@ const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { username } = useParams();
+  const [isValidUsername, setIsValidUsername] = useState(true);
 
   useEffect(() => {
-    // Buat fungsi untuk mengambil data postingan berdasarkan `uid` current user
-    const fetchPosts = async () => {
-      try {
-        const response = await axiosInstance.get(
-          `/userPosts?uid=${currentUser?.id}`
-        );
-        setUserPosts(response.data);
-      } catch (error) {
-        if (error.response) {
-          setErrMessage(error.response?.data?.message);
-        }
-      }
-    };
+    const isValid = username === currentUser?.username;
+    setIsValidUsername(isValid);
 
-    fetchPosts();
-  }, [currentUser?.id]);
+    if (!isValid) {
+      navigate("/page-not-found");
+    } else {
+      // Buat fungsi untuk mengambil data postingan berdasarkan `uid` current user
+      const fetchPosts = async () => {
+        try {
+          const response = await axiosInstance.get(
+            `/userPosts?uid=${currentUser?.id}`
+          );
+          setUserPosts(response.data);
+        } catch (error) {
+          if (error.response) {
+            setErrMessage(error.response?.data?.message);
+          }
+        }
+      };
+
+      fetchPosts();
+    }
+  }, [currentUser?.id, currentUser?.username, navigate, username]);
+
+  if (!isValidUsername) {
+    return <Page404 />;
+  }
 
   const getText = (html) => {
     const document = new DOMParser().parseFromString(html, "text/html");
@@ -45,7 +59,6 @@ const Profile = () => {
     setIsModalOpen(true);
   };
 
-  // Function to handle closing the modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -54,7 +67,6 @@ const Profile = () => {
     try {
       await axiosInstance.put(`/user/${currentUser?.id}`, updatedData);
       setCurrentUser((prevUser) => ({ ...prevUser, ...updatedData }));
-      //   console.log(setCurrentUser);
       closeModal();
     } catch (error) {
       if (error.response) {

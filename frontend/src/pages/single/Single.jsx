@@ -10,8 +10,8 @@ import {
   IconEditActive,
 } from "../../assets/icons";
 import moment from "moment";
-import "./single.scss";
 import { Menu } from "../../components/molecules";
+import "./single.scss";
 
 const Single = () => {
   const [post, setPost] = useState([]);

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosConfig";
 import "./home.scss";
+import { Page404 } from "../../components/molecules";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -71,6 +72,15 @@ const Home = () => {
   const navigateToPost = (postId) => {
     navigate(`/post/${postId}`);
   };
+
+  if (
+    category &&
+    !isValidCategory(category) &&
+    postLoaded &&
+    posts.length === 0
+  ) {
+    return <Page404 />;
+  }
 
   return (
     <div className="home">
