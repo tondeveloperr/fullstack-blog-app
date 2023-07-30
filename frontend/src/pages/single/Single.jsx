@@ -1,18 +1,22 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import axiosInstance from "../../utils/axiosConfig";
+import { AuthContext } from "../../context/AuthContext";
 import {
   IconAvatarDefault,
   IconDelete,
+  IconDeleteActive,
   IconEdit,
-} from "../../assets/icons/page";
-import Menu from "../../components/menu/Menu";
-import { useContext, useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosConfig";
+  IconEditActive,
+} from "../../assets/icons";
 import moment from "moment";
-import { AuthContext } from "../../context/AuthContext";
 import "./single.scss";
+import { Menu } from "../../components/molecules";
 
 const Single = () => {
   const [post, setPost] = useState([]);
+  const [isIconEditHovered, setIsIconEditHovered] = useState(false);
+  const [isIconDeleteHovered, setIconDeleteHovered] = useState(false);
   const [postLoaded, setPostLoaded] = useState(false);
 
   const location = useLocation();
@@ -50,6 +54,13 @@ const Single = () => {
     }
   };
 
+  const handleIconEditHover = (isHovered) => {
+    setIsIconEditHovered(isHovered);
+  };
+  const handleIconDeleteHover = (isHovered) => {
+    setIconDeleteHovered(isHovered);
+  };
+
   const getText = (html) => {
     const document = new DOMParser().parseFromString(html, "text/html");
     return document.body.textContent;
@@ -58,9 +69,17 @@ const Single = () => {
   // Periksa apakah post berhasil diambil, jika tidak, arahkan pengguna ke halaman "Page Not Found"
   if (!postLoaded) {
     return (
-      <h2 style={{ fontSize: "24px", color: "teal", marginTop: "20px" }}>
+      <h4
+        style={{
+          fontSize: "24px",
+          color: "#2a353d",
+          marginTop: "80px",
+          marginLeft: "20px",
+          fontWeight: "lighter",
+        }}
+      >
         Loading...
-      </h2>
+      </h4>
     );
   }
 
@@ -69,17 +88,41 @@ const Single = () => {
       <div className="content">
         <img src={`../upload/${post?.image}`} alt="img" />
         <div className="user">
-          <img src={post.userImage || IconAvatarDefault} alt="img" />
+          <img
+            className="profile-single"
+            src={post.userImage || IconAvatarDefault}
+            alt="img"
+          />
           <div className="info">
             <span>{post.username}</span>
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
           {currentUser?.username === post.username && (
             <div className="edit">
-              <Link to={`/write?edit=${post.id}`} state={post}>
-                <img src={IconEdit} alt="icon-edit" />
+              <Link
+                className="icon"
+                to={`/write?edit=${post.id}`}
+                state={post}
+                onMouseEnter={() => handleIconEditHover(true)}
+                onMouseLeave={() => handleIconEditHover(false)}
+              >
+                <img
+                  src={isIconEditHovered ? IconEditActive : IconEdit}
+                  alt="icon-edit"
+                />
               </Link>
-              <img onClick={handleDelete} src={IconDelete} alt="icon-delete" />
+              <Link
+                to="/"
+                className="icon"
+                onMouseEnter={() => handleIconDeleteHover(true)}
+                onMouseLeave={() => handleIconDeleteHover(false)}
+              >
+                <img
+                  onClick={handleDelete}
+                  src={isIconDeleteHovered ? IconDeleteActive : IconDelete}
+                  alt="icon-delete"
+                />
+              </Link>
             </div>
           )}
         </div>

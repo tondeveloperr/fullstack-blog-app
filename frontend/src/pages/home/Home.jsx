@@ -43,7 +43,7 @@ const Home = () => {
   // Step 3: Periksa apakah kategori valid dan lakukan pengalihan jika tidak
   useEffect(() => {
     if (category && !isValidCategory(category)) {
-      navigate("/page-not-found"); // Ganti "/not-found" dengan path ke halaman "Page Not Found"
+      navigate("/page-not-found");
     }
   }, [category, navigate]);
 
@@ -54,11 +54,23 @@ const Home = () => {
 
   if (!postLoaded) {
     return (
-      <h2 style={{ fontSize: "24px", color: "teal", marginTop: "20px" }}>
+      <h4
+        style={{
+          fontSize: "24px",
+          color: "#2a353d",
+          marginTop: "80px",
+          marginLeft: "20px",
+          fontWeight: "lighter",
+        }}
+      >
         Loading...
-      </h2>
+      </h4>
     );
   }
+
+  const navigateToPost = (postId) => {
+    navigate(`/post/${postId}`);
+  };
 
   return (
     <div className="home">
@@ -72,8 +84,10 @@ const Home = () => {
               <Link className="link" to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
-              <p>{getText(post.description)}</p>
-              <button>Read More</button>
+              <div className="description">
+                <p>{getText(post.description)}</p>
+              </div>
+              <button onClick={() => navigateToPost(post.id)}>Read More</button>
             </div>
           </div>
         ))}
