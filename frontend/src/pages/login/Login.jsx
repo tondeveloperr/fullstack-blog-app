@@ -33,6 +33,7 @@ const Login = () => {
     <div className="auth">
       <h1>Login</h1>
       <form>
+        {isError && <p>{isError}</p>}
         <input
           required
           type="text"
@@ -48,9 +49,12 @@ const Login = () => {
           onChange={handleChange}
         />
         <button onClick={handleSubmit}>Login</button>
-        {isError && <p>{isError}</p>}
+
         <span>
-          Don&rsquo;t you have an account? <Link to="/register">Register</Link>
+          Don&rsquo;t you have an account?{" "}
+          <Link className="link" to="/register">
+            <p>Register</p>
+          </Link>
         </span>
       </form>
     </div>
