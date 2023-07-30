@@ -3,13 +3,25 @@
 
 .single {
   display: flex;
-  gap: 50px;
+  gap: 3.125rem; // Change to 50px in rem
+  margin-top: 3.75rem; // Change to 60px in rem;
+  max-width: 64rem;
+  flex-direction: row;
+
+  @include media("<=phone") {
+    margin-top: 1.5rem;
+    max-width: 300px;
+    flex-direction: column;
+  }
+  @include media("<=tablet") {
+    max-width: 700px;
+  }
 
   .content {
     flex: 5;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
 
     img {
       width: 100%;
@@ -20,47 +32,102 @@
     .user {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
       font-size: 14px;
 
-      img {
+      .profile-single {
         width: 50px;
         height: 50px;
         border-radius: 50%;
         object-fit: cover;
       }
+      .info {
+        display: flex;
+        flex-direction: column;
+        color: $secondary-color;
+
+        span {
+          margin-top: 5px;
+          font-weight: 700;
+          font-size: 1.2rem;
+        }
+        p {
+          line-height: 0;
+          font-size: 1rem;
+        }
+      }
+
+      .edit {
+        display: flex;
+        padding: 5px;
+        gap: 10px;
+
+        .icon img {
+          margin-top: 3px;
+          width: 20px;
+          height: 20px;
+          background-color: white;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
     }
 
-    .info {
-      display: flex;
-      flex-direction: column;
-
-      span {
-        font-weight: bold;
-      }
-      p {
-        line-height: 0;
-      }
-    }
-
-    .edit {
-      display: flex;
-      gap: 5px;
-
-      img {
-        width: 20px;
-        height: 20px;
-        cursor: pointer;
-      }
-    }
     h1 {
-      font-size: 42px;
-      color: #333;
+      display: flex;
+      align-content: flex-start;
+      font-size: 2rem;
+      color: $secondary-color;
     }
 
     p {
+      color: $secondary-color;
+      font-size: 1.25rem;
       text-align: justify;
       line-height: 30px;
+    }
+
+    // On mobile
+    @include media("<=phone") {
+      margin-top: 1.5rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .user {
+        display: flex;
+        justify-content: space-around;
+
+        .profile {
+          width: 2.625rem;
+          height: 2.625rem;
+        }
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          color: $secondary-color;
+
+          span {
+            font-weight: 600;
+            font-size: 1rem;
+          }
+          p {
+            font-size: 0.875rem;
+          }
+        }
+      }
+
+      h1 {
+        font-size: 1.25rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
     }
   }
 }

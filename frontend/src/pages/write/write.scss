@@ -1,11 +1,29 @@
 @import "../../style.scss";
 // WRITE
+
 .add {
-  margin-top: 20px;
   display: flex;
-  gap: 20px;
+  gap: 3.125rem; // Change to 50px in rem
+  margin-top: 3.75rem;
+  width: 80%;
+  max-width: 64rem;
+  flex-direction: row;
+  padding: 1.7rem;
+
+  @include media("<=tablet") {
+    max-width: 700px;
+    gap: 1rem;
+    .menu {
+      .item {
+        .buttons {
+          gap: 0.5rem;
+        }
+      }
+    }
+  }
 
   .content {
+    margin-top: 20px;
     flex: 5;
     display: flex;
     flex-direction: column;
@@ -17,7 +35,7 @@
     }
 
     .editorContainer {
-      height: 300px;
+      height: 420px;
       overflow: scroll;
       border: 1px solid lightgray;
 
@@ -29,6 +47,7 @@
   }
 
   .menu {
+    margin-top: 20px;
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -36,16 +55,17 @@
 
     .item {
       border: 1px solid lightgray;
-      padding: 10px;
+      padding: 1rem;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      font-size: 12px;
-      color: #555;
+      color: $secondary-color;
+      font-size: 0.875rem;
 
       h1 {
-        font-size: 20px;
+        font-size: 1.2rem;
+        color: $secondary-color;
       }
 
       .file {
@@ -53,35 +73,88 @@
         cursor: pointer;
 
         &:hover {
-          color: $lightGreen;
+          color: $primary-color;
         }
       }
 
       .buttons {
         display: flex;
         justify-content: space-between;
-        padding-top: 5px;
+        padding-top: 0.5rem;
 
         :first-child {
           cursor: pointer;
-          color: teal;
+          color: $secondary-color;
           background-color: white;
-          border: 1px solid teal;
+          border: 1px solid $secondary-color;
           padding: 3px 5px;
+          border-radius: 2px;
+          &:hover {
+            background-color: white;
+            border: 1px solid $primary-color;
+            color: $primary-color;
+          }
         }
         :last-child {
           cursor: pointer;
           color: white;
-          background-color: teal;
-          border: 1px solid teal;
+          background-color: $primary-color;
+          border: 1px solid $primary-color;
           padding: 3px 5px;
+          border-radius: 2px;
+          &:hover {
+            background-color: white;
+            border: 1px solid $primary-color;
+            color: $primary-color;
+          }
         }
       }
       .cat {
+        font-size: 0.875rem;
         display: flex;
         align-items: center;
         gap: 2px;
-        color: teal;
+        color: $primary-color;
+      }
+    }
+  }
+
+  // On mobile
+  @include media("<=phone") {
+    margin-top: 2rem;
+    flex-direction: column;
+    gap: 1.5rem; // Change to 50px in rem
+
+    .content {
+      margin-top: 1.5rem;
+
+      input {
+        padding: 0.5rem;
+      }
+
+      .editorContainer {
+        height: 320px;
+        overflow: scroll;
+        border: 1px solid lightgray;
+
+        .editor {
+          height: 100%;
+          border: none;
+        }
+      }
+    }
+
+    .menu {
+      flex-direction: column-reverse;
+      margin-top: 0;
+
+      .item {
+        gap: 0.6rem;
+        font-size: 1rem;
+
+        h1 {
+          font-size: 1.25rem;
+        }
       }
     }
   }
