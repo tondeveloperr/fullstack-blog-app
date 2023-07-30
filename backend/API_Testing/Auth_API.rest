@@ -13,7 +13,7 @@ POST http://localhost:5000/api/v1/login
 Content-Type: application/json
 
 {
-  "username": "kartono update",
+  "username": "kartono",
   "password": "123"
 }
 
