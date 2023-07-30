@@ -1,13 +1,8 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Register from "./pages/register/Register";
-import Login from "./pages/login/Login";
-import Navbar from "./components/navbar/Navbar";
-import Home from "./pages/home/Home";
-import Footer from "./components/footer/Footer";
-import Single from "./pages/single/Single";
-import Write from "./pages/write/Write";
+import { Home, Login, Register, Single, Write } from "./pages";
+import { Footer, Navbar, Page404 } from "./components/molecules";
 import "./style.scss";
-import Page404 from "./components/page404/Page404";
+import Profile from "./pages/profile/Profile";
 
 const Layout = () => {
   return (
@@ -37,6 +32,10 @@ const router = createBrowserRouter([
         element: <Write />,
       },
       {
+        path: "/:username",
+        element: <Profile />,
+      },
+      {
         path: "/*",
         element: <Page404 />,
       },
@@ -54,11 +53,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="app">
-      <div className="container">
+    <>
+      <div className="app">
         <RouterProvider router={router} />
       </div>
-    </div>
+    </>
   );
 }
 
