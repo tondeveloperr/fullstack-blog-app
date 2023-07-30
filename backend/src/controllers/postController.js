@@ -1,6 +1,7 @@
 import { db } from "../utils/db.js";
 import jwt from "jsonwebtoken";
 
+//Get posts by category
 export const getPosts = (req, res) => {
   const category = req.query.category;
 
@@ -21,6 +22,7 @@ export const getPosts = (req, res) => {
   });
 };
 
+// Get post by id params
 export const getPost = (req, res) => {
   const selectQuery =
     "SELECT p.id, `username`,`title`,`description`,`category`, p.image, u.image AS userImage, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id =?";
@@ -123,5 +125,23 @@ export const deletePost = (req, res) => {
 
       return res.status(200).json({ message: "Post has been deleted!" });
     });
+  });
+};
+
+export const getUserPosts = (req, res) => {
+  const uid = req.query.uid;
+
+  const selectQuery = "SELECT * FROM posts WHERE uid=?";
+
+  db.query(selectQuery, [uid], (err, data) => {
+    if (err) {
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+
+    if (data.length === 0) {
+      return res.status(404).json({ message: "You dont have any posts yet." });
+    }
+
+    return res.status(200).json(data);
   });
 };
