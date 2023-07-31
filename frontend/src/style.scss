@@ -29,6 +29,8 @@ $font-family-primary: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .app {
+  max-width: 100%;
+  overflow-x: hidden;
   font-size: 16px;
   display: flex;
   flex-direction: column;
@@ -38,20 +40,3 @@ $font-family-primary: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: inherit;
   }
 }
-
-// .app {
-//   display: flex;
-//   justify-content: center;
-//   // background-color: yellow;
-//   .container {
-//     width: 1024px;
-
-//     .link {
-//       text-decoration: none;
-//       color: inherit;
-//     }
-//   }
-//   @include media("<=phone") {
-//     background-color: #cbd4c2;
-//   }
-// }
