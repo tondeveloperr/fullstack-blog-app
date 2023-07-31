@@ -67,14 +67,17 @@
         font-size: 1.2rem;
         color: $secondary-color;
       }
-
-      .file {
-        text-decoration: underline;
+      label {
+        color: $secondary-color;
+      }
+      .input-field {
+        margin-top: 0.5rem;
+        max-width: 95%;
+        width: 100%;
+        border-radius: 2px;
         cursor: pointer;
-
-        &:hover {
-          color: $primary-color;
-        }
+        border-color: $secondary-color;
+        color: $secondary-color;
       }
 
       .buttons {

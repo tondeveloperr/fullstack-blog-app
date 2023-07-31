@@ -88,15 +88,15 @@ const Write = () => {
             <b>Visibility:</b> Public
           </span>
           <div>
+          <label htmlFor="image">Upload Image:</label>
             <input
-              style={{ display: "none" }}
               type="file"
-              id="file"
+              id="image"
+              name="image"
+              accept="image/*"
               onChange={(e) => setFile(e.target.files[0])}
+              className="input-field"
             />
-            <label className="file" htmlFor="file">
-              Upload Image
-            </label>
           </div>
           <div className="buttons">
             <button>Save as a draft</button>
