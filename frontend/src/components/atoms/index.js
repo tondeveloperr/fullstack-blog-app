@@ -1,5 +1,5 @@
-import DropDown from "./dropDown/DropDown";
-import WriteMenu from "./writeMenu/WriteMenu";
+import DropDown from "./dropdown/DropDown";
+import WriteMenu from "./writemenu/WriteMenu";
 import HamburgerMenu from "./hamburger/HamburgerMenu";
 import ModalEditProfile from "./modaleditprofile/ModalEditProfile";
 
