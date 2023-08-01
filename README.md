@@ -5,6 +5,7 @@ Full-Stack Blog is an open-source project that provides a dynamic and interactiv
 ## `Preview Project 👇`
 
 ![Screenshot](preview/screencapture.png)
+
 ![Screenshot](preview/preview.gif)
 
 ## Key Features:
@@ -24,14 +25,41 @@ Full-Stack Blog is an open-source project that provides a dynamic and interactiv
 
 ## Local Setup:
 
-1. Clone this repository to your computer with the command: `git clone https://github.com/tondeveloperr/fullstack-blog-app.git`.
-2. Open the terminal and navigate to the project directory with: `cd fullstack-blog-app`.
-3. Install frontend dependencies by running: `cd frontend && npm install` in the terminal.
-4. Install frontend dependencies by running: `cd backend && npm install` in the terminal.
+1. Clone this repository to your computer with the command:
+
+```
+git clone https://github.com/tondeveloperr/fullstack-blog-app.git
+```
+
+2. Open the terminal and navigate to the project directory with:
+
+```
+cd fullstack-blog-app
+```
+
+3. Install frontend dependencies by running:
+
+```
+cd frontend && npm install
+```
+4. Install frontend dependencies by running:
+
+```
+ cd backend && npm install
+```
 5. Make sure MySQL is installed and running on your system.
+
 6. Create a new MySQL database and configure the `.env` file in the backend directory with your database settings and JWT secret key as needed.
-7. Run the backend server with: `cd backend && npm run dev` in the terminal.
-8. Run the frontend development server with: `cd frontend && npm run dev` in a separate terminal window.
+7. Run the backend server with:
+```
+ cd backend && npm run dev
+```
+8. Run the frontend development server with:
+
+```
+ cd frontend && npm run dev
+```
+in a separate terminal window.
 
 ## Contribution:
 
