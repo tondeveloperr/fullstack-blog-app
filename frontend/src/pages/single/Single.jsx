@@ -41,7 +41,7 @@ const Single = () => {
       }
     };
     fetchData();
-  }, [postId]);
+  }, [postId, navigate]);
 
   const handleDelete = async () => {
     try {
@@ -88,11 +88,19 @@ const Single = () => {
       <div className="content">
         <img src={`../upload/${post?.image}`} alt="img" />
         <div className="user">
-          <img
-            className="profile-single"
-            src={post.userImage || IconAvatarDefault}
-            alt="img"
-          />
+          {currentUser?.image ? (
+            <img
+              src={`../upload/${currentUser?.image}`}
+              alt="user"
+              className="profile-single"
+            />
+          ) : (
+            <img
+              src={IconAvatarDefault}
+              alt="user"
+              className="profile-single"
+            />
+          )}
           <div className="info">
             <span>{post.username}</span>
             <p>Posted {moment(post.date).fromNow()}</p>

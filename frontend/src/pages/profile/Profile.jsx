@@ -14,11 +14,11 @@ const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
-  const { username } = useParams();
+  const { username: currentUsername } = useParams();
   const [isValidUsername, setIsValidUsername] = useState(true);
 
   useEffect(() => {
-    const isValid = username === currentUser?.username;
+    const isValid = currentUser?.username === currentUsername;
     setIsValidUsername(isValid);
 
     if (!isValid) {
@@ -40,7 +40,7 @@ const Profile = () => {
 
       fetchPosts();
     }
-  }, [currentUser?.id, currentUser?.username, navigate, username]);
+  }, [currentUser?.id, currentUser?.username, navigate, currentUsername]);
 
   if (!isValidUsername) {
     return <Page404 />;
