@@ -18,6 +18,7 @@ Content-Type: application/json
 }
 
 
+
 ### GET user post
 GET http://localhost:5000/userPosts?uid=16
 Content-Type: application/json
