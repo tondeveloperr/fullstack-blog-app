@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
-import PropTypes from "prop-types";
-import "./modalEditProfile.scss";
 import axiosInstance from "../../../utils/axiosConfig";
+import PropTypes from "prop-types";
+import "./modaleditprofile.scss";
 
 const ModalEditProfile = ({ onClose, onUpdateProfile }) => {
   const { currentUser } = useContext(AuthContext);
@@ -126,5 +126,4 @@ ModalEditProfile.propTypes = {
   onClose: PropTypes.func.isRequired,
   onUpdateProfile: PropTypes.func.isRequired,
 };
-
 export default ModalEditProfile;
